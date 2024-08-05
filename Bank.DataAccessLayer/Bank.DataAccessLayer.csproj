@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AFA31662-04C0-4E4D-8310-687BACC93506}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>BankPresentation</RootNamespace>
-    <AssemblyName>BankPresentation</AssemblyName>
+    <ProjectGuid>{822FD39F-9B15-4126-A265-8F49D80F0881}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bank.DataAccessLayer</RootNamespace>
+    <AssemblyName>Bank.DataAccessLayer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,21 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Bank.BusinessLogicLayer\Bank.BusinessLogicLayer.csproj">
-      <Project>{4ad01a01-823f-428e-8a34-6bfd794d02cd}</Project>
-      <Name>Bank.BusinessLogicLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bank.Configuration\Bank.Configuration.csproj">
-      <Project>{f4e5e7af-dd86-40dc-a06c-cdb26676d7fc}</Project>
-      <Name>Bank.Configuration</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Bank.Entities\Bank.Entities.csproj">
       <Project>{237e7118-7be0-4360-b76a-45eeae37f4ef}</Project>
       <Name>Bank.Entities</Name>
