@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Bank.Entities.Contracts
 {
+    /// <summary>
+    /// Represents interface of customer entity
+    /// </summary>
     public interface ICustomer
     {
+        #region Properties
         //Globally Unique identifier : generate unique identity
         Guid CustomerId { get; set; }
         long CustomerCode { get; set; }
@@ -16,6 +20,7 @@ namespace Bank.Entities.Contracts
         string City { get; set; }
         string Country { get; set; }
         string Mobile { get; set; }
+        #endregion
 
     }
 }
