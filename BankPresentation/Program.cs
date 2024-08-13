@@ -1,4 +1,6 @@
-﻿class Program
+﻿using BankPresentation;
+
+class Program
 {
     //Application execution starts here
     static void Main()
@@ -17,7 +19,7 @@
 
         //read password from keyboard only if username is entered
         if(userName != "")
-        {
+        { 
             //read Password from keyword
             System.Console.Write("Password:");
             password = System.Console.ReadLine();
@@ -80,12 +82,23 @@
             System.Console.WriteLine("1. Add Customer");
             System.Console.WriteLine("2. Delete Customer");
             System.Console.WriteLine("3. Update Customer");
-            System.Console.WriteLine("4. View Customer");
+            System.Console.WriteLine("4. Search Customer");
+            System.Console.WriteLine("5. View Customer");
             System.Console.WriteLine("0. Back to Main Menu ");
 
 
             System.Console.Write("Enter choice:");
             customerMenuChoice = System.Convert.ToInt32(System.Console.ReadLine());
+
+            //switch case
+            switch(customerMenuChoice)
+            {
+                case 1: CustomerPresentation.AddCustomer();
+                    break;
+                case 5: CustomerPresentation.ViewCustomers();
+                    break; 
+            }
+
 
         } while (customerMenuChoice != 0);
 

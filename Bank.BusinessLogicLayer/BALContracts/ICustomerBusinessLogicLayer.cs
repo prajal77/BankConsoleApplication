@@ -5,20 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Bank.Entities;
 
-namespace Bank.DataAccessLayer.DALContract
+namespace Bank.BusinessLogicLayer.BALContracts
 {
-
     /// <summary>
-    /// Interface that represents customers data access layer
+    /// Interface that represents customers business logic
     /// </summary>
-    public interface ICustomersDataAccessLayer
+    public interface ICustomerBusinessLogicLayer
     {
         /// <summary>
-        /// Returns all existing Customers
+        /// List all existing Customers
         /// </summary>
         /// <returns></returns>
         List<Customer> GetCustomers();
-
 
         /// <summary>
         /// Returns a set of customers that matches with specified criteria
@@ -46,5 +44,6 @@ namespace Bank.DataAccessLayer.DALContract
         /// <param name="customerId">CustomerId to delete </param>
         /// <returns>Returns true, that indicates the customer is updated successfully</returns>
         bool DeleteCustomer(Guid customerId);
+
     }
 }

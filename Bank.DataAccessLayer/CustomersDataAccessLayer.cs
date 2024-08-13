@@ -12,11 +12,11 @@ namespace Bank.DataAccessLayer
     {
 
         #region Fields
-        private List<Customer> _customers;
+        private static List<Customer> _customers;
         #endregion
 
         #region Constructors
-        public CustomersDataAccessLayer()
+         static CustomersDataAccessLayer()
         {
             _customers = new List<Customer>();
         }
@@ -26,7 +26,7 @@ namespace Bank.DataAccessLayer
         /// <summary>
         /// Represents source customers collection
         /// </summary>
-        private List<Customer> Customers
+        private static List<Customer> Customers
         {
             set => _customers = value; 
             get => _customers;
@@ -39,13 +39,24 @@ namespace Bank.DataAccessLayer
         /// Returns all existing customers
         /// </summary>
         /// <returns>Customers List</returns>
-        public List<Customer> GetCustomers()
+        public  List<Customer> GetCustomers()
         {
-            //create a new customer list
-            List<Customer> customersList = new List<Customer>();
-            //copy all customers from the source collection into the newCustomers list
-             Customers.ForEach(item=> customersList.Add(item.Clone() as Customer) );
-            return customersList;
+            try
+            {
+                //create a new customer list
+                List<Customer> customersList = new List<Customer>();
+                //copy all customers from the source collection into the newCustomers list
+                Customers.ForEach(item => customersList.Add(item.Clone() as Customer));
+                return customersList;
+            }
+            catch (CustomerException)
+            {
+                throw;
+            }
+            catch (Exception )
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -54,17 +65,28 @@ namespace Bank.DataAccessLayer
         /// <param name="predicate"></param>
         /// <returns> List of matching customers</returns>
 
-        public List<Customer> GetCustomersByCondition(Predicate<Customer> predicate)
+        public  List<Customer> GetCustomersByConditions(Predicate<Customer> predicate)
         {
-            //create a new customer list
-            List<Customer> customersList = new List<Customer>();
-            
-            //filer the collection
-            List<Customer> filteredCustomers = customersList.FindAll(predicate);
+            try
+            {
+                //create a new customer list
+                List<Customer> customersList = new List<Customer>();
 
-            //copy all customers from the source collection into the newCustomers list
-            Customers.ForEach(item => filteredCustomers.Add(item.Clone() as Customer));
-            return customersList;
+                //filer the collection
+                List<Customer> filteredCustomers = Customers.FindAll(predicate);
+
+                //copy all customers from the source collection into the newCustomers list
+                filteredCustomers.ForEach(item => customersList.Add(item.Clone() as Customer));
+                return customersList;
+            }
+            catch (CustomerException)
+            {
+                throw;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -75,13 +97,24 @@ namespace Bank.DataAccessLayer
 
         public Guid AddCustomer(Customer customer)
         {
-            //generate new GUID
-            customer.CustomerId = Guid.NewGuid();
+            try
+            {
+                //generate new GUID
+                customer.CustomerId = Guid.NewGuid();
 
-            //add customer
-            Customers.Add(customer);
+                //add customer
+                Customers.Add(customer);
 
-            return customer.CustomerId;
+                return customer.CustomerId;
+            }
+            catch (CustomerException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -91,27 +124,37 @@ namespace Bank.DataAccessLayer
         /// <returns>Determines whether the customer is updated or not</returns>
         public bool UpdateCustomer(Customer customer)
         {
-            //find existing customer by CustomerId
-            Customer existingCustomer = Customers.Find(item=> item.CustomerId == customer.CustomerId);
-
-            //update all details of customer
-            if(existingCustomer != null)
+            try
             {
-                existingCustomer.CustomerCode = customer.CustomerCode;
-                existingCustomer.CustomerName = customer.CustomerName;
-                existingCustomer.Address = customer.Address;
-                existingCustomer.City = customer.City;
-                existingCustomer.Country = customer.Country;
-                existingCustomer.Landmark = customer.Landmark;
-                existingCustomer.Mobile = customer.Mobile;
+                //find existing customer by CustomerId
+                Customer existingCustomer = Customers.Find(item => item.CustomerId == customer.CustomerId);
 
-                return true;//customer is updated
+                //update all details of customer
+                if (existingCustomer != null)
+                {
+                    existingCustomer.CustomerCode = customer.CustomerCode;
+                    existingCustomer.CustomerName = customer.CustomerName;
+                    existingCustomer.Address = customer.Address;
+                    existingCustomer.City = customer.City;
+                    existingCustomer.Country = customer.Country;
+                    existingCustomer.Landmark = customer.Landmark;
+                    existingCustomer.Mobile = customer.Mobile;
+
+                    return true;//customer is updated
+                }
+                else
+                {
+                    return false; //customer not updated
+                }
             }
-            else
+            catch (CustomerException)
             {
-                return false; //customer not updated
+                throw;
             }
-
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -121,15 +164,28 @@ namespace Bank.DataAccessLayer
         /// <returns>boolean value</returns>
         public bool DeleteCustomer(Guid customerId)
         {
-            //delete customer by CustomerId
-            if (Customers.RemoveAll(item=> item.CustomerId == customerId) > 0)
+            try
             {
-                return true;
+                //delete customer by CustomerId
+                if (Customers.RemoveAll(item => item.CustomerId == customerId) > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (CustomerException)
             {
-                return false;
+                throw;
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
 
         }
 
